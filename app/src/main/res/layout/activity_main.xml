@@ -16,19 +16,20 @@
         android:layout_height="50dp"
         android:text="Hello World!"
         />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_main_bse"
         android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:scrollbars="horizontal"/>
+       />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_main_nse"
         android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:scrollbars="horizontal"/>
+        />
 
     <Button
         android:id="@+id/btn_main_tnc"

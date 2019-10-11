@@ -17,7 +17,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.MyViewHolder
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView stockName, stockPrice;
 
-        MyViewHolder(View itemView) {
+       public   MyViewHolder(View itemView) {
             super(itemView);
             stockName = itemView.findViewById(R.id.tv_display_stock_name);
             stockPrice = itemView.findViewById(R.id.tv_display_stock_price);

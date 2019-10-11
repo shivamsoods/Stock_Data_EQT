@@ -1,9 +1,12 @@
 package com.frictionhacks.eqt;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,15 @@ public class MainActivity extends AppCompatActivity {
         bseAdapter=new StockAdapter(bseList);
         nseAdapter=new StockAdapter(nseList);
 
+        RecyclerView.LayoutManager bseLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL,true);
+        RecyclerView.LayoutManager nseLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL,true);
+
+        bseRecyclerView.setLayoutManager(bseLayoutManager);
+        nseRecyclerView.setLayoutManager(nseLayoutManager);
+
+        bseRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        nseRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
         nseRecyclerView.setAdapter(nseAdapter);
         bseRecyclerView.setAdapter(bseAdapter);
         
@@ -40,8 +52,19 @@ public class MainActivity extends AppCompatActivity {
         bseList.add(bseStock);
         bseList.add(bseStock);
         bseList.add(bseStock);
+        bseList.add(bseStock);
+
+        bseAdapter.notifyDataSetChanged();
 
         StockDataModel nseStock= new StockDataModel("NSE","Prixe_ns","S_sts");
+        nseList.add(nseStock);
+        nseList.add(nseStock);
+        nseList.add(nseStock);
+        nseList.add(nseStock);
+        nseList.add(nseStock);
+        nseList.add(nseStock);
+
+        nseAdapter.notifyDataSetChanged();
 
 
     }
