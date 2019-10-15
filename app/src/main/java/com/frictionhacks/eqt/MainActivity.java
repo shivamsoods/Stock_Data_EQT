@@ -6,10 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.Path;
+import android.graphics.RadialGradient;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import org.eazegraph.lib.charts.ValueLineChart;
 import org.eazegraph.lib.models.ValueLinePoint;
@@ -63,9 +68,13 @@ public class MainActivity extends AppCompatActivity {
         ValueLineChart mCubicValueLineChart = findViewById(R.id.lc_main);
 
         mCubicValueLineChart.clearChart();
+
         ValueLineSeries series = new ValueLineSeries();
-        series.setColor(0xFF56E7F1);
+        series.setColor(Color.parseColor("#1BCCB0"));
+
+
         series.addPoint(new ValueLinePoint("Seen",.6f));
+
         for(int i=0;i<=17;i++){
             final int random = new Random().nextInt(16) + 1;
             series.addPoint(new ValueLinePoint(String.valueOf(i+1),random));
