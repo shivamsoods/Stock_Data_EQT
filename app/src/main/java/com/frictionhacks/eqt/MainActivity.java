@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         bseAdapter=new StockAdapter(bseList);
         nseAdapter=new StockAdapter(nseList);
 
-        RecyclerView.LayoutManager bseLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL,true);
-        RecyclerView.LayoutManager nseLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL,true);
+        RecyclerView.LayoutManager bseLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL,false);
+        RecyclerView.LayoutManager nseLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL,false);
 
         bseRecyclerView.setLayoutManager(bseLayoutManager);
         nseRecyclerView.setLayoutManager(nseLayoutManager);
