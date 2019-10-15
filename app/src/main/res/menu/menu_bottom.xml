@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_bottom_home"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />
+    <item
+        android:id="@+id/menu_bottom_equity"
+        android:icon="@drawable/ic_equity_finder"
+        android:title="Equity" />
+    <item
+        android:id="@+id/menu_bottom_search"
+        android:icon="@drawable/ic_search"
+        android:title="Search" />
+    <item
+        android:id="@+id/menu_bottom_ocr"
+        android:icon="@drawable/ic_shopping_cart"
+        android:title="OCR" />
+</menu>

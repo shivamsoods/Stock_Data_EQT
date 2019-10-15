@@ -1,20 +1,18 @@
 package com.frictionhacks.eqt;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.ColorMatrix;
-import android.graphics.Path;
-import android.graphics.RadialGradient;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import org.eazegraph.lib.charts.ValueLineChart;
 import org.eazegraph.lib.models.ValueLinePoint;
@@ -26,41 +24,69 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<StockDataModel> nseList= new ArrayList<>();
-    private List<StockDataModel> bseList= new ArrayList<>();
-    private RecyclerView nseRecyclerView,bseRecyclerView;
-    private StockAdapter bseAdapter,nseAdapter;
+
+    private List<StockDataModel> bseList = new ArrayList<>();
+    private RecyclerView bseRecyclerView;
+    private StockAdapter bseAdapter;
     private Button btnStockSearch;
+    private ChipNavigationBar nbBottom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bseRecyclerView=findViewById(R.id.rv_main_bse);
-        nseRecyclerView=findViewById(R.id.rv_main_nse);
-
-        bseAdapter=new StockAdapter(bseList);
-        nseAdapter=new StockAdapter(nseList);
-
-        RecyclerView.LayoutManager bseLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL,false);
-        RecyclerView.LayoutManager nseLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL,false);
-
+        bseRecyclerView = findViewById(R.id.rv_main_bse);
+        bseAdapter = new StockAdapter(bseList);
+        RecyclerView.LayoutManager bseLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         bseRecyclerView.setLayoutManager(bseLayoutManager);
-        nseRecyclerView.setLayoutManager(nseLayoutManager);
-
         bseRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        nseRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        nseRecyclerView.setAdapter(nseAdapter);
         bseRecyclerView.setAdapter(bseAdapter);
-        
-        prepareFakeData();
-        btnStockSearch=findViewById(R.id.btn_main_find);
 
+
+        nbBottom = findViewById(R.id.nv_main_bottom);
+        nbBottom.setItemEnabled(2131165311,true);
+        nbBottom.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int i) {
+                Log.d("TAGg", "onItemSelected: "+i);
+                switch (i) {
+                    case 2131165311:
+                        //home
+                        Intent intent1=new Intent(getApplicationContext(),MainActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case 2131165310:
+                        //equity
+                        Intent intent2=new Intent(getApplicationContext(),StockSearchActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case 2131165313:
+                        //search
+                        Intent intent3=new Intent(getApplicationContext(),StockSearchActivity.class);
+                        startActivity(intent3);
+
+                        break;
+                    case 2131165312:
+                        //ocr
+                        Intent intent4=new Intent(getApplicationContext(),StockSearchActivity.class);
+                        startActivity(intent4);
+
+                        break;
+
+                    default:
+                        Intent intent5=new Intent(getApplicationContext(),MainActivity.class);
+                        startActivity(intent5);
+                        break;
+                }
+            }
+        });
+        prepareFakeData();
+        btnStockSearch = findViewById(R.id.btn_main_find);
         btnStockSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(MainActivity.this,StockSearchActivity.class);
+                Intent intent = new Intent(MainActivity.this, StockSearchActivity.class);
                 startActivity(intent);
             }
         });
@@ -73,11 +99,11 @@ public class MainActivity extends AppCompatActivity {
         series.setColor(Color.parseColor("#1BCCB0"));
 
 
-        series.addPoint(new ValueLinePoint("Seen",.6f));
+        series.addPoint(new ValueLinePoint("Seen", .6f));
 
-        for(int i=0;i<=17;i++){
+        for (int i = 0; i <= 17; i++) {
             final int random = new Random().nextInt(16) + 1;
-            series.addPoint(new ValueLinePoint(String.valueOf(i+1),random));
+            series.addPoint(new ValueLinePoint(String.valueOf(i + 1), random));
         }
 
         mCubicValueLineChart.addSeries(series);
@@ -86,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void prepareFakeData() {
 
-        StockDataModel bseStock= new StockDataModel("BSE","Prixe","bse");
+        StockDataModel bseStock = new StockDataModel("BSE", "Prixe", "bse");
         bseList.add(bseStock);
         bseList.add(bseStock);
         bseList.add(bseStock);
@@ -95,16 +121,6 @@ public class MainActivity extends AppCompatActivity {
         bseList.add(bseStock);
 
         bseAdapter.notifyDataSetChanged();
-
-        StockDataModel nseStock= new StockDataModel("NSE","Prixe_ns","S_sts");
-        nseList.add(nseStock);
-        nseList.add(nseStock);
-        nseList.add(nseStock);
-        nseList.add(nseStock);
-        nseList.add(nseStock);
-        nseList.add(nseStock);
-
-        nseAdapter.notifyDataSetChanged();
 
 
     }

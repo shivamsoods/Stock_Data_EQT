@@ -1,182 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<LinearLayout
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_main_find"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="5dp"
-        android:text="Find you a plan" />
+        android:layout_height="wrap_content">
 
-
-<androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:elevation="4dp"
-    android:padding="8dp"
-    android:layout_margin="10dp"
-    app:cardCornerRadius="20dp">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/tv_main_stock_name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="14dp"
-            android:text="SENSEX"
-            android:textColor="#000000"
-            android:textSize="18sp" />
+            android:orientation="vertical"
+            tools:context=".MainActivity">
 
-        <org.eazegraph.lib.charts.ValueLineChart
-            android:id="@+id/lc_main"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            app:egCurveSmoothness="0.4"
-            app:egIndicatorLineColor="#FE6DA8"
-            app:egLegendHeight="40dp"
-            app:egShowStandardValue="true"
-            app:egUseCubic="true"
-            app:egUseOverlapFill="true" />
+            <Button
+                android:id="@+id/btn_main_find"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:text="Find you a plan" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:elevation="4dp"
+                android:padding="8dp"
+                app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_main_stock_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="14dp"
+                        android:text="SENSEX"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
+                    <org.eazegraph.lib.charts.ValueLineChart
+                        android:id="@+id/lc_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        app:egCurveSmoothness="0.4"
+                        app:egIndicatorLineColor="#FE6DA8"
+                        app:egLegendHeight="40dp"
+                        app:egShowStandardValue="true"
+                        app:egUseCubic="true"
+                        app:egUseOverlapFill="true" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="DAY HIGH"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="DAY LOW"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="DAY OPEN"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp">
+
+                        <TextView
+                            android:id="@+id/tv_main_dh_value"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="2399"
+                            android:textColor="#1BCCB0"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv_main_dl_value"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="6767"
+                            android:textColor="#1BCCB0"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv_main_do_value"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="895"
+                            android:textColor="#1BCCB0"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Last Traded Price"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_main_ltp_value"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="30000"
+                            android:textColor="#29E283"
+                            android:textSize="31sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="DAY HIGH"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="DAY LOW"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="DAY OPEN"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp">
-
-            <TextView
-                android:id="@+id/tv_main_dh_value"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="2399"
-                android:textColor="#1BCCB0"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tv_main_dl_value"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="6767"
-                android:textColor="#1BCCB0"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tv_main_do_value"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="895"
-                android:textColor="#1BCCB0"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp">
-
-            <TextView
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Last Traded Price"
+                android:layout_marginLeft="8dp"
+                android:padding="8dp"
+                android:text="TOP PERFORMING STOCKS"
                 android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/tv_main_ltp_value"
-                android:layout_width="0dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_main_bse"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="30000"
-                android:textColor="#29E283"
-                android:textSize="31sp" />
+                android:layout_margin="5dp" />
+
+            <Button
+                android:id="@+id/btn_main_tnc"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                android:text="Analyse your TnC" />
+
         </LinearLayout>
 
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
-
-    <TextView
-        android:layout_marginLeft="8dp"
-        android:padding="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TOP PERFORMING BSE STOCK"
-        android:textSize="18sp"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_main_bse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp" />
-    <TextView
-        android:layout_marginLeft="8dp"
-        android:padding="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TOP PERFORMING NSE STOCK"
-        android:textSize="18sp"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_main_nse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp" />
-
-
-    <Button
-        android:id="@+id/btn_main_tnc"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom"
-        android:text="Analyse your TnC" />
-</LinearLayout>
-
     </ScrollView>
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/nv_main_bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:cnb_menuResource="@menu/menu_bottom"
+        android:elevation="16dp"
+        app:cnb_orientationMode="horizontal"/>
+
+</RelativeLayout>
