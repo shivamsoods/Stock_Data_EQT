@@ -29,6 +29,16 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         />
+    <org.eazegraph.lib.charts.ValueLineChart
+        android:id="@+id/lc_main"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:egUseCubic="true"
+        app:egUseOverlapFill="true"
+        app:egCurveSmoothness="0.4"
+        app:egIndicatorLineColor="#FE6DA8"
+        app:egLegendHeight="40dp"
+        app:egShowStandardValue="true"/>
 
     <Button
         android:id="@+id/btn_main_tnc"

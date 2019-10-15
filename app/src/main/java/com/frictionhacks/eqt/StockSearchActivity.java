@@ -78,8 +78,7 @@ public class StockSearchActivity extends AppCompatActivity {
         slider.setStartText(min);
         slider.setEndText(max);
 
-        float pos=slider.getPosition();
-        Log.d("TAAG", "value set is "+pos );
+
 
         btnSearchSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

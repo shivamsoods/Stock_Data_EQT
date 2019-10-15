@@ -11,8 +11,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import org.eazegraph.lib.charts.ValueLineChart;
+import org.eazegraph.lib.models.ValueLinePoint;
+import org.eazegraph.lib.models.ValueLineSeries;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,7 +60,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ValueLineChart mCubicValueLineChart = findViewById(R.id.lc_main);
 
+        mCubicValueLineChart.clearChart();
+        ValueLineSeries series = new ValueLineSeries();
+        series.setColor(0xFF56E7F1);
+        series.addPoint(new ValueLinePoint("Seen",.6f));
+        for(int i=0;i<=17;i++){
+            final int random = new Random().nextInt(16) + 1;
+            series.addPoint(new ValueLinePoint(String.valueOf(i+1),random));
+        }
+
+        mCubicValueLineChart.addSeries(series);
+        mCubicValueLineChart.startAnimation();
     }
 
     private void prepareFakeData() {
