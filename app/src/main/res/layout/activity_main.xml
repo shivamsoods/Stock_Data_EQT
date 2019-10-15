@@ -8,13 +8,12 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <SearchView
+    <Button
         android:id="@+id/btn_main_find"
-        android:queryHint="Enter Amount"
+        android:text="Find you a plan"
         android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Hello World!"
         />
 
     <androidx.recyclerview.widget.RecyclerView

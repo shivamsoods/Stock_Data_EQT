@@ -5,7 +5,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -17,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private List<StockDataModel> bseList= new ArrayList<>();
     private RecyclerView nseRecyclerView,bseRecyclerView;
     private StockAdapter bseAdapter,nseAdapter;
-
+    private Button btnStockSearch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,17 @@ public class MainActivity extends AppCompatActivity {
         bseRecyclerView.setAdapter(bseAdapter);
         
         prepareFakeData();
+        btnStockSearch=findViewById(R.id.btn_main_find);
+
+        btnStockSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(MainActivity.this,StockSearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     private void prepareFakeData() {

@@ -1,35 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:elevation="5dp"
-    android:background="@color/colorAccent"
-    >
+    android:layout_margin="5dp"
+    android:orientation="vertical">
 
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp">
-    <TextView
-        android:id="@+id/tv_display_stock_name"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="NAME of STOCK" />
+        android:background="@color/colorAccent"
+        android:elevation="5dp"
+        app:cardCornerRadius="4dp">
 
-    <TextView
-        android:layout_below="@id/tv_display_stock_name"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:id="@+id/tv_display_stock_price"
-        android:text="Price of STOCK"/>
-    <ImageView
-        android:src="@drawable/ic_launcher_background"
-        android:layout_below="@id/tv_display_stock_name"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_toRightOf="@id/tv_display_stock_price"/>
-</RelativeLayout>
-</androidx.cardview.widget.CardView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_display_stock_name"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="NAME of STOCK" />
+
+            <TextView
+                android:id="@+id/tv_display_stock_price"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_below="@id/tv_display_stock_name"
+                android:text="Price of STOCK" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/tv_display_stock_name"
+                android:layout_toRightOf="@id/tv_display_stock_price"
+                android:src="@drawable/ic_launcher_background" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
