@@ -1,13 +1,17 @@
 package com.frictionhacks.eqt;
 
-import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -19,24 +23,34 @@ import java.util.List;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-public class StockSearchActivity extends AppCompatActivity {
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class EquityFragment extends Fragment {
+
+
+    public EquityFragment() {
+        // Required empty public constructor
+    }
     private Button btnSearchSubmit;
     private RecyclerView searchRecyclerView;
     private List<StockDataModel> searchResultList= new ArrayList<>();
     private StockAdapter searchResultAdapter;
     private LinearLayout llSearchTop;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stock_search);
 
-        btnSearchSubmit=findViewById(R.id.btn_search_submit);
-        searchRecyclerView=findViewById(R.id.rv_search_stock);
-        llSearchTop=findViewById(R.id.ll_search_top);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+      View view= inflater.inflate(R.layout.fragment_equity, container, false);
+
+        btnSearchSubmit=view.findViewById(R.id.btn_search_submit);
+        searchRecyclerView=view.findViewById(R.id.rv_search_stock);
+        llSearchTop=view.findViewById(R.id.ll_search_top);
 
         searchResultAdapter=new StockAdapter(searchResultList);
-        RecyclerView.LayoutManager searchLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
+        RecyclerView.LayoutManager searchLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
         searchRecyclerView.setLayoutManager(searchLayoutManager);
         searchRecyclerView.setItemAnimator(new DefaultItemAnimator());
         searchRecyclerView.setAdapter(searchResultAdapter);
@@ -56,7 +70,7 @@ public class StockSearchActivity extends AppCompatActivity {
         final String max = "Long time";
 
 
-        final FluidSlider slider = findViewById(R.id.fs_search);
+        final FluidSlider slider = view.findViewById(R.id.fs_search);
         slider.setBeginTrackingListener(new Function0<Unit>() {
             @Override
             public Unit invoke() {
@@ -90,17 +104,9 @@ public class StockSearchActivity extends AppCompatActivity {
                 searchRecyclerView.setVisibility(View.VISIBLE);
             }
         });
+    return view;
+    }
 
 
-    }
-    @Override
-    public void onBackPressed() {
-        if(llSearchTop.getVisibility()==View.GONE){
-            llSearchTop.setVisibility(View.VISIBLE);
-            searchRecyclerView.setVisibility(View.GONE);
-        }
-        else {
-            finish();
-        }
-    }
+
 }
