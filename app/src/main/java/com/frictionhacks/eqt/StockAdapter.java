@@ -1,8 +1,5 @@
 package com.frictionhacks.eqt;
 
-import android.content.Intent;
-import android.net.Uri;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.fragment.app.ListFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -27,11 +23,11 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.MyViewHolder
         TextView stockName, stockPrice;
         CardView cardView;
 
-       public   MyViewHolder(View itemView) {
+        public MyViewHolder(View itemView) {
             super(itemView);
             stockName = itemView.findViewById(R.id.tv_display_stock_name);
             stockPrice = itemView.findViewById(R.id.tv_display_stock_price);
-            cardView=itemView.findViewById(R.id.cv_home_stock);
+            cardView = itemView.findViewById(R.id.cv_home_stock);
         }
     }
 
@@ -42,7 +38,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.MyViewHolder
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-         itemView = LayoutInflater.from(parent.getContext())
+        itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.stock_home_display, parent, false);
 
         return new MyViewHolder(itemView);
@@ -50,17 +46,22 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
-        StockDataModel stock = stockList.get(position);
+        final StockDataModel stock = stockList.get(position);
         holder.stockName.setText((stock.getStockName()));
-        holder.stockPrice.setText((stock.getStockPrice()));
+        holder.stockPrice.setText((stock.getLastTradedPrice()));
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bun=new Bundle();
-                bun.putString("name","HDFC_m");
+                Bundle bun = new Bundle();
+                bun.putString("name", stock.getStockName());
+                bun.putString("dh", stock.getDayHigh());
+                bun.putString("do", stock.getDayOpen());
+                bun.putString("ltp", stock.getLastTradedPrice());
+                bun.putString("dl", stock.getDayLow());
 
-                loadFragment(new StockDetailFragment(),bun);
+
+                loadFragment(new StockDetailFragment(), bun);
 
             }
         });
@@ -72,10 +73,10 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.MyViewHolder
         return stockList.size();
     }
 
-    private void loadFragment(Fragment fragment,Bundle bun) {
-        AppCompatActivity activity= (AppCompatActivity) itemView.getContext();
+    private void loadFragment(Fragment fragment, Bundle bun) {
+        AppCompatActivity activity = (AppCompatActivity) itemView.getContext();
         fragment.setArguments(bun);
-        FragmentTransaction ft=activity.getSupportFragmentManager().beginTransaction();
+        FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fl_main, fragment);
         ft.addToBackStack(null);
         ft.commit();

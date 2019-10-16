@@ -57,7 +57,8 @@ public class EquityFragment extends Fragment {
         searchRecyclerView.setAdapter(searchResultAdapter);
 
 
-        StockDataModel bseStock= new StockDataModel("RESS","Prizze","jaj");
+        StockDataModel bseStock= new StockDataModel("name-1","12","12","12","12.6");
+
         searchResultList.add(bseStock);
         searchResultList.add(bseStock);
         searchResultList.add(bseStock);

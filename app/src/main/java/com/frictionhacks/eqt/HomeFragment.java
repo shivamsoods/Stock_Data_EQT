@@ -52,8 +52,8 @@ public class HomeFragment extends Fragment {
         bseRecyclerView.setAdapter(bseAdapter);
 
 
-
         prepareFakeData();
+
         ValueLineChart mCubicValueLineChart = view.findViewById(R.id.lc_main);
         mCubicValueLineChart.clearChart();
         ValueLineSeries series = new ValueLineSeries();
@@ -72,15 +72,16 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+
+
     private void prepareFakeData() {
 
-        StockDataModel bseStock = new StockDataModel("BSE", "Prixe", "bse");
-        bseList.add(bseStock);
-        bseList.add(bseStock);
-        bseList.add(bseStock);
-        bseList.add(bseStock);
-        bseList.add(bseStock);
-        bseList.add(bseStock);
+        bseList.add(new StockDataModel("name-1","12","12","12","12.6"));
+        bseList.add(new StockDataModel("name-2","14","17","14","23"));
+        bseList.add(new StockDataModel("name-3","52","35","1","562"));
+        bseList.add(new StockDataModel("name-4","62","442","62","16.4"));
+        bseList.add(new StockDataModel("name-5","17","1266","6","144"));
+
 
         bseAdapter.notifyDataSetChanged();
 

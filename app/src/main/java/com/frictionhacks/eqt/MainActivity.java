@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 2:
                         //search
-                        loadFragment(new EquityFragment());
+                        loadFragment(new StockSearchFragment());
                         break;
                     case 3:
                         //ocr

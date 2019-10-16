@@ -3,36 +3,38 @@
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="80dp"
     android:id="@+id/cv_home_stock"
-    android:layout_height="wrap_content"
-    android:elevation="5dp"
+    android:layout_width="130dp"
+    android:layout_height="130dp"
     android:layout_margin="5dp"
-    app:cardCornerRadius="6dp">
+    android:elevation="5dp"
+    app:cardCornerRadius="10dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_display_stock_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
             android:layout_gravity="center"
+            android:layout_marginTop="18dp"
             android:text="NAME"
+            android:textSize="20sp"
             android:textColor="#1BCCB0" />
 
         <TextView
             android:id="@+id/tv_display_stock_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="18dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="18dp"
             android:padding="4dp"
             android:text="Price"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -1,18 +1,12 @@
 package com.frictionhacks.eqt;
 
 public class StockDataModel {
-    private String stockName, stockPrice, stockStatus;
-    private String dayOpen, dayHigh, dayLow, lastTradedPrice;
+    private String stockName, dayOpen, dayHigh, dayLow, lastTradedPrice;
 
     public StockDataModel() {
 
     }
 
-    public StockDataModel(String stockName, String stockPrice, String stockStatus) {
-        this.stockName = stockName;
-        this.stockPrice = stockPrice;
-        this.stockStatus = stockStatus;
-    }
 
     public StockDataModel(String stockName, String dayOpen, String dayHigh, String dayLow, String lastTradedPrice) {
         this.stockName = stockName;
@@ -63,19 +57,5 @@ public class StockDataModel {
         this.stockName = stockName;
     }
 
-    public String getStockPrice() {
-        return stockPrice;
-    }
 
-    public void setStockPrice(String stockPrice) {
-        this.stockPrice = stockPrice;
-    }
-
-    public String getStockStatus() {
-        return stockStatus;
-    }
-
-    public void setStockStatus(String stockStatus) {
-        this.stockStatus = stockStatus;
-    }
 }

@@ -20,7 +20,7 @@ public class StockDetailAdapter extends RecyclerView.Adapter<StockDetailAdapter.
         public   MyViewHolder(View itemView) {
             super(itemView);
             stockName = itemView.findViewById(R.id.tv_display_stock_name);
-            dayOpen = itemView.findViewById(R.id.tv_detil_do_value);
+            dayOpen = itemView.findViewById(R.id.tv_detail_do_value);
             dayHigh=itemView.findViewById(R.id.tv_detail_dh_value);
             dayLow=itemView.findViewById(R.id.tv_detail_dl_value);
             lastTradedPrice=itemView.findViewById(R.id.tv_detail_ltp_value);
@@ -36,7 +36,7 @@ public class StockDetailAdapter extends RecyclerView.Adapter<StockDetailAdapter.
     @Override
     public StockDetailAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.stock_detail_display, parent, false);
+                .inflate(R.layout.fragment_stock_detail, parent, false);
 
         return new StockDetailAdapter.MyViewHolder(itemView);
     }
@@ -49,6 +49,8 @@ public class StockDetailAdapter extends RecyclerView.Adapter<StockDetailAdapter.
         holder.dayLow.setText((stock.getDayLow()));
         holder.dayOpen.setText((stock.getDayOpen()));
         holder.lastTradedPrice.setText((stock.getLastTradedPrice()));
+
+
 
 
     }
