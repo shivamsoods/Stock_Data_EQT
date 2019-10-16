@@ -37,7 +37,7 @@
                     android:textSize="18sp" />
 
                 <org.eazegraph.lib.charts.ValueLineChart
-                    android:id="@+id/lc_main"
+                    android:id="@+id/lc_detail"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     app:egCurveSmoothness="0.4"

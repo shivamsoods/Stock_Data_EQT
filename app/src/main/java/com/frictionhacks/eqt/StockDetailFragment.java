@@ -2,6 +2,7 @@ package com.frictionhacks.eqt;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,12 @@ import android.widget.Toast;
 
 import com.hussain_chachuliya.customsearch.SearchAdapterHolder;
 
+import org.eazegraph.lib.charts.ValueLineChart;
+import org.eazegraph.lib.models.ValueLinePoint;
+import org.eazegraph.lib.models.ValueLineSeries;
+
+import java.util.ArrayList;
+
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
@@ -24,6 +31,9 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class StockDetailFragment extends Fragment {
     private Bundle bun;
     private TextView tvStockName,tvDayHigh,tvDayLow,tvDayOpen,tvLastTradedPrice;
+    private ValueLineSeries series;
+    private ValueLineChart mCubicValueLineChart;
+    private ArrayList<String> gVal;
 
     public StockDetailFragment() {
         // Required empty public constructor
@@ -43,8 +53,17 @@ public class StockDetailFragment extends Fragment {
         String dh= bun.getString("dh");
         String dl= bun.getString("dl");
         String ltp= bun.getString("ltp");
+        gVal= (ArrayList<String>)getArguments().getSerializable("gVal");
 
 
+
+        mCubicValueLineChart = view.findViewById(R.id.lc_detail);
+        mCubicValueLineChart.clearChart();
+
+        series = new ValueLineSeries();
+        series.setColor(Color.parseColor("#1BCCB0"));
+
+        prepareGraph();
 
         Log.d(TAG, "onCreateView: "+ name);
         Toast.makeText(getContext(), "name is "+name, Toast.LENGTH_SHORT).show();
@@ -62,6 +81,20 @@ public class StockDetailFragment extends Fragment {
         tvDayOpen.setText(dayOpen);
 
         return view;
+    }
+
+    private void prepareGraph(){
+
+        for(int i=0;i<gVal.size();i++){
+
+            series.addPoint(new ValueLinePoint("Seen", Float.parseFloat(gVal.get(i))));
+
+        }
+
+       mCubicValueLineChart.addSeries(series);
+        mCubicValueLineChart.setUseDynamicScaling(true);
+        mCubicValueLineChart.startAnimation();
+
     }
 
 }

@@ -1,12 +1,27 @@
 package com.frictionhacks.eqt;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 public class StockDataModel {
-    private String stockName, dayOpen, dayHigh, dayLow, lastTradedPrice;
+    private String stockName, dayOpen, dayHigh, dayLow, lastTradedPrice,pdc;
+private ArrayList<String> gVal;
+
 
     public StockDataModel() {
 
     }
 
+    public StockDataModel(String stockName, String dayOpen, String dayHigh, String dayLow, String lastTradedPrice, String pdc, ArrayList<String> gVal) {
+        this.stockName = stockName;
+        this.dayOpen = dayOpen;
+        this.dayHigh = dayHigh;
+        this.dayLow = dayLow;
+        this.lastTradedPrice = lastTradedPrice;
+        this.pdc = pdc;
+        this.gVal = gVal;
+    }
 
     public StockDataModel(String stockName, String dayOpen, String dayHigh, String dayLow, String lastTradedPrice) {
         this.stockName = stockName;
@@ -15,6 +30,23 @@ public class StockDataModel {
         this.dayLow = dayLow;
         this.lastTradedPrice = lastTradedPrice;
     }
+
+    public String getPdc() {
+        return pdc;
+    }
+
+    public ArrayList<String> getgVal() {
+        return gVal;
+    }
+
+    public void setgVal(ArrayList<String> gVal) {
+        this.gVal = gVal;
+    }
+
+    public void setPdc(String pdc) {
+        this.pdc = pdc;
+    }
+
 
     public String getDayOpen() {
         return dayOpen;

@@ -59,7 +59,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.MyViewHolder
                 bun.putString("do", stock.getDayOpen());
                 bun.putString("ltp", stock.getLastTradedPrice());
                 bun.putString("dl", stock.getDayLow());
-
+                bun.putSerializable("gVal",stock.getgVal());
 
                 loadFragment(new StockDetailFragment(), bun);
 
