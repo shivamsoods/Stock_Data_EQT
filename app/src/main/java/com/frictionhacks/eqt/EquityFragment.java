@@ -1,6 +1,7 @@
 package com.frictionhacks.eqt;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -74,7 +75,6 @@ public class EquityFragment extends Fragment {
         slider.setBeginTrackingListener(new Function0<Unit>() {
             @Override
             public Unit invoke() {
-                //textView.setVisibility(View.INVISIBLE);
                 return Unit.INSTANCE;
             }
         });
@@ -82,13 +82,14 @@ public class EquityFragment extends Fragment {
         slider.setEndTrackingListener(new Function0<Unit>() {
             @Override
             public Unit invoke() {
-                //textView.setVisibility(View.VISIBLE);
                 return Unit.INSTANCE;
             }
         });
 
-
-        slider.setPosition(0.3f);
+       slider.setBubbleText("Days");
+       //slider.setColorBubble(Color.parseColor("#13E42D"));
+        slider.setColorBar(Color.parseColor("#13EDCA"));
+        slider.setPosition(0.5f);
         slider.setStartText(min);
         slider.setEndText(max);
 
@@ -105,6 +106,7 @@ public class EquityFragment extends Fragment {
             }
         });
     return view;
+
     }
 
 

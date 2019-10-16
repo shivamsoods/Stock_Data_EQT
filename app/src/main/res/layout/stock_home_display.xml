@@ -4,6 +4,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="80dp"
+    android:id="@+id/cv_home_stock"
     android:layout_height="wrap_content"
     android:elevation="5dp"
     android:layout_margin="5dp"

@@ -37,6 +37,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView bseRecyclerView;
     private StockAdapter bseAdapter;
     private Button btnStockSearch;
+    private StockDetailAdapter stockDetailAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,19 +51,14 @@ public class HomeFragment extends Fragment {
         bseRecyclerView.setItemAnimator(new DefaultItemAnimator());
         bseRecyclerView.setAdapter(bseAdapter);
 
+
+
         prepareFakeData();
-
-
         ValueLineChart mCubicValueLineChart = view.findViewById(R.id.lc_main);
-
         mCubicValueLineChart.clearChart();
-
         ValueLineSeries series = new ValueLineSeries();
         series.setColor(Color.parseColor("#1BCCB0"));
-
-
         series.addPoint(new ValueLinePoint("Seen", .6f));
-
         for (int i = 0; i <= 17; i++) {
             final int random = new Random().nextInt(16) + 1;
             series.addPoint(new ValueLinePoint(String.valueOf(i + 1), random));
@@ -70,6 +66,8 @@ public class HomeFragment extends Fragment {
 
         mCubicValueLineChart.addSeries(series);
         mCubicValueLineChart.startAnimation();
+
+
 
         return view;
     }

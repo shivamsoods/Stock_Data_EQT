@@ -163,12 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp" />
 
-            <Button
-                android:id="@+id/btn_main_tnc"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="bottom"
-                android:text="Analyse your TnC" />
+
 
         </LinearLayout>
 

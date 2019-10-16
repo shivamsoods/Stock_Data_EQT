@@ -13,9 +13,6 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    //private ChipNavigationBar nbBottom;
-    //private BubbleTabBar nbBottom;
     private AHBottomNavigation nbBottom;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,5 +83,4 @@ public class MainActivity extends AppCompatActivity {
         ft.replace(R.id.fl_main, fragment);
         ft.commit();
     }
-
 }
