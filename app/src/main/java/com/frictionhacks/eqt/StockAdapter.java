@@ -77,6 +77,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.MyViewHolder
         AppCompatActivity activity = (AppCompatActivity) itemView.getContext();
         fragment.setArguments(bun);
         FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.animator.slide_in_left,R.animator.slide_out_right, 0, 0);
         ft.replace(R.id.fl_main, fragment);
         ft.addToBackStack(null);
         ft.commit();

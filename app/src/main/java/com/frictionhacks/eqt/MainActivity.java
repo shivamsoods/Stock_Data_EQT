@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadFragment(Fragment fragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.animator.slide_in_top,R.animator.slide_out_right);
         ft.replace(R.id.fl_main, fragment);
         ft.commit();
     }

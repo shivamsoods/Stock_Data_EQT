@@ -3,19 +3,16 @@ package com.frictionhacks.eqt;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,14 +24,12 @@ import com.hussain_chachuliya.customsearch.CustomSearch;
 import com.hussain_chachuliya.customsearch.SearchAdapterHolder;
 
 import org.eazegraph.lib.charts.ValueLineChart;
-import org.eazegraph.lib.models.ValueLinePoint;
 import org.eazegraph.lib.models.ValueLineSeries;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -47,17 +42,15 @@ import static com.android.volley.VolleyLog.TAG;
 public class StockSearchFragment extends Fragment {
     private SearchAdapterHolder holder;
     private final int REQ_CODE = 55;
-    private String url_base="https://92878288.ngrok.io/search?code=";
+    private String url_base = "https://92878288.ngrok.io/search?code=";
     private ValueLineSeries series;
     private ValueLineChart mCubicValueLineChart;
     private RequestQueue queue;
 
 
-
     public StockSearchFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -69,7 +62,7 @@ public class StockSearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_stock_search, container, false);
+        View view = inflater.inflate(R.layout.fragment_stock_search, container, false);
 
 
         holder = new SearchAdapterHolder();
@@ -83,19 +76,18 @@ public class StockSearchFragment extends Fragment {
     }
 
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQ_CODE && resultCode == RESULT_OK) {
-            Toast.makeText(getContext(),"clicked item "+data.getStringExtra(CustomSearch.CUSTOM_SEARCH_TEXT), Toast.LENGTH_SHORT).show();
+
+      if(requestCode == REQ_CODE && resultCode == RESULT_OK) {
+            //Toast.makeText(getContext(),"clicked item "+data.getStringExtra(CustomSearch.CUSTOM_SEARCH_TEXT), Toast.LENGTH_SHORT).show();
+            //Log.d(TAG, "onActivityResult: "+data.getStringExtra(CustomSearch.CUSTOM_SEARCH_TEXT));
 
             onlineStockSearch(data.getStringExtra(CustomSearch.CUSTOM_SEARCH_TEXT));
 
-
-
-
-        }        queue = Volley.newRequestQueue(getContext());
+        }
+        queue = Volley.newRequestQueue(getContext());
 
     }
 
@@ -163,21 +155,18 @@ public class StockSearchFragment extends Fragment {
     }
 
 
-
     private void loadFragment(Fragment fragment, Bundle bun) {
-        AppCompatActivity activity= (AppCompatActivity) getActivity();
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
         fragment.setArguments(bun);
-        FragmentTransaction ft=activity.getSupportFragmentManager().beginTransaction();
+        FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fl_main, fragment);
         ft.commit();
     }
 
 
+    private void onlineStockSearch(String stockCode) {
 
-
-    private void onlineStockSearch(String stockCode){
-
-        String url_search=url_base+stockCode;
+        String url_search = url_base + stockCode;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url_search,
                 new Response.Listener<String>() {
                     @Override
@@ -210,23 +199,23 @@ public class StockSearchFragment extends Fragment {
 
 
             Bundle bun = new Bundle();
-            bun.putString("name",obj.getString("NAME"));
-            bun.putString("dh",obj.getString("DH"));
-            bun.putString("dl",obj.getString("DL"));
-            bun.putString("ltp",obj.getString("LTP"));
-            bun.putString("pdc",obj.getString("PDC"));
-            bun.putString("do",obj.getString("DO"));
+            bun.putString("name", obj.getString("NAME"));
+            bun.putString("dh", obj.getString("DH"));
+            bun.putString("dl", obj.getString("DL"));
+            bun.putString("ltp", obj.getString("LTP"));
+            bun.putString("pdc", obj.getString("PDC"));
+            bun.putString("do", obj.getString("DO"));
 
-            ArrayList<String> gVal=new ArrayList<>();
-            for (int h= 0 ;h<gArray.length();h++){
+            ArrayList<String> gVal = new ArrayList<>();
+            for (int h = 0; h < gArray.length(); h++) {
                 gVal.add(gArray.getString(h));
             }
 
-            bun.putSerializable("gVal",gVal);
-          //  series.addPoint(new ValueLinePoint("Seen00",Float.parseFloat(pdc)));
+            bun.putSerializable("gVal", gVal);
+            //  series.addPoint(new ValueLinePoint("Seen00",Float.parseFloat(pdc)));
 
 
-            loadFragment(new StockDetailFragment(),bun);
+            loadFragment(new StockDetailFragment(), bun);
 
         } catch (JSONException e) {
             e.printStackTrace();
