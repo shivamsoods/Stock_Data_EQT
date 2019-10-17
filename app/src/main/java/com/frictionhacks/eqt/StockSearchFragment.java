@@ -165,6 +165,7 @@ public class StockSearchFragment extends Fragment {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         fragment.setArguments(bun);
         FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.animator.slide_in_top,R.animator.slide_out_right);
         ft.replace(R.id.fl_main, fragment);
         ft.commit();
     }
