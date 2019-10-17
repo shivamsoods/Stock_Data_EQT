@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -60,7 +61,7 @@ public class HomeFragment extends Fragment {
     private TextView tvDH, tvDL, tvDO, tvLTP, tvName;
     private ValueLineSeries series;
     private ValueLineChart mCubicValueLineChart;
-    private LinearLayout llAllMain;
+    private LinearLayout llAllMain,llStonkMain;
     private ProgressBar pbMain;
 
     @Override
@@ -71,6 +72,8 @@ public class HomeFragment extends Fragment {
 
         llAllMain=view.findViewById(R.id.ll_all_main);
         pbMain=view.findViewById(R.id.pb_main);
+        llStonkMain=view.findViewById(R.id.ll_main_stonk);
+
         llAllMain.setVisibility(View.GONE);
         pbMain.setVisibility(View.VISIBLE);
 
@@ -183,7 +186,9 @@ public class HomeFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d(TAG, "error " + error);
-
+                pbMain.setVisibility(View.GONE);
+                llAllMain.setVisibility(View.GONE);
+                llStonkMain.setVisibility(View.VISIBLE);
             }
         });
 
