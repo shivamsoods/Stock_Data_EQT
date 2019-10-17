@@ -1,10 +1,13 @@
 package com.frictionhacks.eqt;
 
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -41,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         nbBottom.setCurrentItem(0);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.white)));
 
 
         nbBottom.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {

@@ -145,6 +145,8 @@ public class HomeFragment extends Fragment {
                for (int h= 0 ;h<gArray.length();h++){
                    gVal.add(gArray.getString(h));
                }
+                ArrayList<String> tVal=new ArrayList<>();
+
                 bseList.add(new StockDataModel(obj.getString("NAME"), obj.getString("DO"),obj.getString("DH"), obj.getString("DL"), obj.getString("LTP"),obj.getString("PDC"),gVal));
                 bseAdapter.notifyDataSetChanged();
             }
