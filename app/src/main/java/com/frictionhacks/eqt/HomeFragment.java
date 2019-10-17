@@ -55,8 +55,8 @@ public class HomeFragment extends Fragment {
     private Button btnStockSearch;
     private StockDetailAdapter stockDetailAdapter;
     private RequestQueue queue;
-    private String url_sensex = "https://1e51dc8e.ngrok.io/sensex";
-    private String url_top5="https://1e51dc8e.ngrok.io/top5";
+    private String url_sensex = "https://92878288.ngrok.io/sensex";
+    private String url_top5="https://92878288.ngrok.io/top5";
     private TextView tvDH, tvDL, tvDO, tvLTP, tvName;
     private ValueLineSeries series;
     private ValueLineChart mCubicValueLineChart;
@@ -136,7 +136,7 @@ public class HomeFragment extends Fragment {
             for(int j=0;j<jsonText.length();j++){
                 JSONObject obj= jsonText.getJSONObject(j);
                 JSONArray gArray=obj.getJSONArray("graph_values");
-                Log.d(TAG, "g1    "+gArray.getString(0));
+                //Log.d(TAG, "g1    "+gArray.getString(0));
 
                ArrayList<String> gVal=new ArrayList<>();
                for (int h= 0 ;h<gArray.length();h++){
