@@ -33,7 +33,7 @@ public class StockDetailFragment extends Fragment {
     private TextView tvStockName,tvDayHigh,tvDayLow,tvDayOpen,tvLastTradedPrice;
     private ValueLineSeries series;
     private ValueLineChart mCubicValueLineChart;
-    private ArrayList<String> gVal;
+    private ArrayList<String> gVal,tVal;
 
     public StockDetailFragment() {
         // Required empty public constructor
@@ -54,6 +54,7 @@ public class StockDetailFragment extends Fragment {
         String dl= bun.getString("dl");
         String ltp= bun.getString("ltp");
         gVal= (ArrayList<String>)getArguments().getSerializable("gVal");
+        tVal= (ArrayList<String>)getArguments().getSerializable("tVal");
 
 
 
@@ -65,8 +66,8 @@ public class StockDetailFragment extends Fragment {
 
         prepareGraph();
 
-        Log.d(TAG, "onCreateView: "+ name);
-        Toast.makeText(getContext(), "name is "+name, Toast.LENGTH_SHORT).show();
+        //Log.d(TAG, "onCreateView: "+ name);
+       // Toast.makeText(getContext(), "name is "+name, Toast.LENGTH_SHORT).show();
 
         tvStockName=view.findViewById(R.id.tv_detail_stock_name);
         tvDayHigh=view.findViewById(R.id.tv_detail_dh_value);
@@ -87,7 +88,7 @@ public class StockDetailFragment extends Fragment {
 
         for(int i=0;i<gVal.size();i++){
 
-            series.addPoint(new ValueLinePoint("Seen", Float.parseFloat(gVal.get(i))));
+            series.addPoint(new ValueLinePoint(tVal.get(i), Float.parseFloat(gVal.get(i))));
 
         }
 

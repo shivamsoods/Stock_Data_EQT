@@ -87,6 +87,10 @@ public class StockSearchFragment extends Fragment {
             onlineStockSearch(data.getStringExtra(CustomSearch.CUSTOM_SEARCH_TEXT));
 
         }
+      else
+      {
+          startActivity(new Intent(getActivity(),MainActivity.class));
+      }
         queue = Volley.newRequestQueue(getContext());
 
     }
@@ -152,6 +156,8 @@ public class StockSearchFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         holder.removeAdapter(REQ_CODE);
+
+
     }
 
 
@@ -162,6 +168,7 @@ public class StockSearchFragment extends Fragment {
         ft.replace(R.id.fl_main, fragment);
         ft.commit();
     }
+
 
 
     private void onlineStockSearch(String stockCode) {
@@ -195,6 +202,8 @@ public class StockSearchFragment extends Fragment {
             JSONObject obj = new JSONObject(jsonText);
 
             JSONArray gArray = obj.getJSONArray("graph_values");
+            JSONArray tArray = obj.getJSONArray("time_values");
+
             //Log.d(TAG, "jsonParseSet: " + graphValues);
 
 
@@ -207,11 +216,15 @@ public class StockSearchFragment extends Fragment {
             bun.putString("do", obj.getString("DO"));
 
             ArrayList<String> gVal = new ArrayList<>();
+            ArrayList<String> tVal = new ArrayList<>();
+
             for (int h = 0; h < gArray.length(); h++) {
                 gVal.add(gArray.getString(h));
+                tVal.add(tArray.getString(h));
             }
 
             bun.putSerializable("gVal", gVal);
+            bun.putSerializable("tVal",tVal);
             //  series.addPoint(new ValueLinePoint("Seen00",Float.parseFloat(pdc)));
 
 

@@ -139,15 +139,20 @@ public class HomeFragment extends Fragment {
             for(int j=0;j<jsonText.length();j++){
                 JSONObject obj= jsonText.getJSONObject(j);
                 JSONArray gArray=obj.getJSONArray("graph_values");
+                JSONArray tArray=obj.getJSONArray("time_values");
+
                 //Log.d(TAG, "g1    "+gArray.getString(0));
 
                ArrayList<String> gVal=new ArrayList<>();
                for (int h= 0 ;h<gArray.length();h++){
                    gVal.add(gArray.getString(h));
                }
-                ArrayList<String> tVal=new ArrayList<>();
 
-                bseList.add(new StockDataModel(obj.getString("NAME"), obj.getString("DO"),obj.getString("DH"), obj.getString("DL"), obj.getString("LTP"),obj.getString("PDC"),gVal));
+                ArrayList<String> tVal=new ArrayList<>();
+                for (int h= 0 ;h<gArray.length();h++){
+                    tVal.add(tArray.getString(h));
+                }
+                bseList.add(new StockDataModel(obj.getString("NAME"), obj.getString("DO"),obj.getString("DH"), obj.getString("DL"), obj.getString("LTP"),obj.getString("PDC"),gVal,tVal));
                 bseAdapter.notifyDataSetChanged();
             }
 
@@ -211,7 +216,8 @@ public class HomeFragment extends Fragment {
             String pdc=obj.getString("PDC");
 
             JSONArray graphValues = obj.getJSONArray("graph_values");
-            Log.d(TAG, "jsonParseSet: " + graphValues);
+            JSONArray timeValues = obj.getJSONArray("time_values");
+            //Log.d(TAG, "jsonParseSet: " + graphValues);
 
 
             series.addPoint(new ValueLinePoint("Seen00",Float.parseFloat(pdc)));
@@ -221,7 +227,7 @@ public class HomeFragment extends Fragment {
                 float a = Float.parseFloat(graphValues.getString(i));
                 //Log.d(TAG, "val " + a);
 
-                series.addPoint(new ValueLinePoint("Seen", a));
+                series.addPoint(new ValueLinePoint(timeValues.getString(i), a));
 
             }
             //series.addPoint(new ValueLinePoint("Seen00",Float.parseFloat(obj.getString("DL"))-200 ));

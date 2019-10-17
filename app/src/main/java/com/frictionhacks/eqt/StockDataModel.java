@@ -6,14 +6,14 @@ import java.util.List;
 
 public class StockDataModel {
     private String stockName, dayOpen, dayHigh, dayLow, lastTradedPrice,pdc;
-private ArrayList<String> gVal;
+private ArrayList<String> gVal,tVal;
 
 
     public StockDataModel() {
 
     }
 
-    public StockDataModel(String stockName, String dayOpen, String dayHigh, String dayLow, String lastTradedPrice, String pdc, ArrayList<String> gVal) {
+    public StockDataModel(String stockName, String dayOpen, String dayHigh, String dayLow, String lastTradedPrice, String pdc, ArrayList<String> gVal, ArrayList<String> tVal) {
         this.stockName = stockName;
         this.dayOpen = dayOpen;
         this.dayHigh = dayHigh;
@@ -21,6 +21,7 @@ private ArrayList<String> gVal;
         this.lastTradedPrice = lastTradedPrice;
         this.pdc = pdc;
         this.gVal = gVal;
+        this.tVal = tVal;
     }
 
     public StockDataModel(String stockName, String dayOpen, String dayHigh, String dayLow, String lastTradedPrice) {
@@ -29,6 +30,14 @@ private ArrayList<String> gVal;
         this.dayHigh = dayHigh;
         this.dayLow = dayLow;
         this.lastTradedPrice = lastTradedPrice;
+    }
+
+    public ArrayList<String> gettVal() {
+        return tVal;
+    }
+
+    public void settVal(ArrayList<String> tVal) {
+        this.tVal = tVal;
     }
 
     public String getPdc() {
