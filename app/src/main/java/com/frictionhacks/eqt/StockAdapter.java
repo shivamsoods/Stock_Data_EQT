@@ -1,6 +1,7 @@
 package com.frictionhacks.eqt;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +16,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import static com.android.volley.VolleyLog.TAG;
+
 public class StockAdapter extends RecyclerView.Adapter<StockAdapter.MyViewHolder> {
     private List<StockDataModel> stockList;
     private View itemView;
+    private String width;
+    private CardView cardView;
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView stockName, stockPrice;
         CardView cardView;
+
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -35,11 +41,14 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.MyViewHolder
         this.stockList = stockList;
     }
 
+
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.stock_home_display, parent, false);
+
 
         return new MyViewHolder(itemView);
     }
@@ -50,6 +59,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.MyViewHolder
         holder.stockName.setText((stock.getStockName()));
         holder.stockPrice.setText((stock.getLastTradedPrice()));
 
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,8 +69,9 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.MyViewHolder
                 bun.putString("do", stock.getDayOpen());
                 bun.putString("ltp", stock.getLastTradedPrice());
                 bun.putString("dl", stock.getDayLow());
-                bun.putSerializable("gVal",stock.getgVal());
-                bun.putSerializable("tVal",stock.gettVal());
+                bun.putSerializable("gVal", stock.getgVal());
+                bun.putSerializable("tVal", stock.gettVal());
+                bun.putString("width", stock.getWidth());
 
                 loadFragment(new StockDetailFragment(), bun);
 
@@ -78,7 +89,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.MyViewHolder
         AppCompatActivity activity = (AppCompatActivity) itemView.getContext();
         fragment.setArguments(bun);
         FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
-        ft.setCustomAnimations(R.animator.slide_in_left,R.animator.slide_out_right, 0, 0);
+        ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right, 0, 0);
         ft.replace(R.id.fl_main, fragment);
         ft.addToBackStack(null);
         ft.commit();

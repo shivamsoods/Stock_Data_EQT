@@ -56,8 +56,6 @@ public class StockDetailFragment extends Fragment {
         gVal= (ArrayList<String>)getArguments().getSerializable("gVal");
         tVal= (ArrayList<String>)getArguments().getSerializable("tVal");
 
-
-
         mCubicValueLineChart = view.findViewById(R.id.lc_detail);
         mCubicValueLineChart.clearChart();
 

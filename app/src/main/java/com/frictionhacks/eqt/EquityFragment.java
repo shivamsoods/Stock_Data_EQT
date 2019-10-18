@@ -3,11 +3,13 @@ package com.frictionhacks.eqt;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
@@ -15,13 +17,24 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.ramotion.fluidslider.FluidSlider;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
+
+import static com.android.volley.VolleyLog.TAG;
 
 
 /**
@@ -38,7 +51,15 @@ public class EquityFragment extends Fragment {
     private RecyclerView searchRecyclerView;
     private List<StockDataModel> searchResultList = new ArrayList<>();
     private StockAdapter searchResultAdapter;
+    private RequestQueue queue;
     private LinearLayout llSearchTop;
+    private String url_search;
+    final String min = "Short time";
+    final String max = "Long time";
+    private EditText etBudget;
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,10 +68,12 @@ public class EquityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_equity, container, false);
 
         btnSearchSubmit = view.findViewById(R.id.btn_search_submit);
-        searchRecyclerView = view.findViewById(R.id.rv_search_stock);
+        searchRecyclerView = view.findViewById(R.id.rv_equity_stock);
         llSearchTop = view.findViewById(R.id.ll_search_top);
 
+        etBudget=view.findViewById(R.id.et_search_budget);
         searchResultAdapter = new StockAdapter(searchResultList);
+
 
         RecyclerView.LayoutManager searchLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         searchRecyclerView.setLayoutManager(searchLayoutManager);
@@ -58,21 +81,10 @@ public class EquityFragment extends Fragment {
         searchRecyclerView.setAdapter(searchResultAdapter);
 
 
-        StockDataModel bseStock = new StockDataModel("name-1", "12", "12", "12", "12.6");
-
-        searchResultList.add(bseStock);
-        searchResultList.add(bseStock);
-        searchResultList.add(bseStock);
-        searchResultList.add(bseStock);
-        searchResultList.add(bseStock);
-        searchResultList.add(bseStock);
-        searchResultAdapter.notifyDataSetChanged();
-
-        searchRecyclerView.setVisibility(View.GONE);
+        searchResultList.clear();
+        queue = Volley.newRequestQueue(getContext());
 
 
-        final String min = "Short time";
-        final String max = "Long time";
 
 
         final FluidSlider slider = view.findViewById(R.id.fs_search);
@@ -102,10 +114,24 @@ public class EquityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 float pos = slider.getPosition();
-                pos = pos * 100;
-                Log.d("TAAG", "value set is " + pos);
-                llSearchTop.setVisibility(View.GONE);
-                searchRecyclerView.setVisibility(View.VISIBLE);
+                pos=pos*100;
+                int posi;
+                String budget=etBudget.getText().toString();
+
+                if(budget.isEmpty()){
+                    budget="0";
+                }
+
+                Log.d(TAG, "int value budget "+budget);
+
+                if(pos>40){
+                    posi=1;
+                }
+                else {
+                    posi=0;
+                }
+               onlineSearchRequest(budget,String.valueOf(posi));
+
             }
         });
         return view;
@@ -113,7 +139,65 @@ public class EquityFragment extends Fragment {
     }
 
 
+private void onlineSearchRequest(String budget,String tenure){
 
+        url_search=getString(R.string.url_base)+"budget?budget="+budget+"&ls="+tenure;
+    Log.d(TAG, "budget url "+url_search);
+
+    //https://f19773f6.ngrok.io/budget?budget=30000&ls=0
+
+    JsonArrayRequest req = new JsonArrayRequest(url_search,
+            new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    Log.d(TAG, "budget response "+response);
+                    jsonSearchParseSet(response);
+                }
+
+            }, new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            Log.d(TAG, "error " + error);
+
+        }
+    });
+
+    queue.add(req);
+}
+
+private void jsonSearchParseSet(JSONArray jsonText){
+
+    try {
+
+        for (int j = 0; j < jsonText.length(); j++) {
+            JSONObject obj = jsonText.getJSONObject(j);
+            JSONArray gArray = obj.getJSONArray("graph_values");
+            JSONArray tArray = obj.getJSONArray("time_values");
+
+            ArrayList<String> gVal = new ArrayList<>();
+            for (int h = 0; h < gArray.length(); h++) {
+                gVal.add(gArray.getString(h));
+            }
+
+            ArrayList<String> tVal = new ArrayList<>();
+            for (int h = 0; h < gArray.length(); h++) {
+                tVal.add(tArray.getString(h));
+            }
+            //0=home 1=equity
+            searchResultList.add(new StockDataModel(obj.getString("NAME"), obj.getString("DO"), obj.getString("DH"), obj.getString("DL"), obj.getString("LTP"), obj.getString("PDC"), gVal, tVal,"1"));
+            searchResultAdapter.notifyDataSetChanged();
+
+            llSearchTop.setVisibility(View.GONE);
+            searchRecyclerView.setVisibility(View.VISIBLE);
+        }
+
+
+    } catch (JSONException e) {
+        e.printStackTrace();
+    }
+
+
+}
 
 
 }

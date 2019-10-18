@@ -45,7 +45,6 @@ import static com.android.volley.VolleyLog.TAG;
 public class StockSearchFragment extends Fragment {
     private SearchAdapterHolder holder;
     private final int REQ_CODE = 55;
-    private String url_base = "https://92878288.ngrok.io/search?code=";
     private RequestQueue queue;
     private LinearLayout llSearch;
     private ProgressBar pbSearch;
@@ -187,7 +186,7 @@ public class StockSearchFragment extends Fragment {
 
     private void onlineStockSearch(String stockCode) {
 
-        String url_search = url_base + stockCode;
+        String url_search = getString(R.string.url_base)+"search?code=" + stockCode;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url_search,
                 new Response.Listener<String>() {
                     @Override

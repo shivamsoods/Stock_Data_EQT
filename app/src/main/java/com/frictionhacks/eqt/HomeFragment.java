@@ -7,8 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -33,7 +31,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,15 +50,11 @@ public class HomeFragment extends Fragment {
     private List<StockDataModel> bseList = new ArrayList<>();
     private RecyclerView bseRecyclerView;
     private StockAdapter bseAdapter;
-    private Button btnStockSearch;
-    private StockDetailAdapter stockDetailAdapter;
     private RequestQueue queue;
-    private String url_sensex = "https://92878288.ngrok.io/sensex";
-    private String url_top5="https://92878288.ngrok.io/top5";
     private TextView tvDH, tvDL, tvDO, tvLTP, tvName;
     private ValueLineSeries series;
     private ValueLineChart mCubicValueLineChart;
-    private LinearLayout llAllMain,llStonkMain;
+    private LinearLayout llAllMain, llStonkMain;
     private ProgressBar pbMain;
 
     @Override
@@ -70,9 +63,9 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        llAllMain=view.findViewById(R.id.ll_all_main);
-        pbMain=view.findViewById(R.id.pb_main);
-        llStonkMain=view.findViewById(R.id.ll_main_stonk);
+        llAllMain = view.findViewById(R.id.ll_all_main);
+        pbMain = view.findViewById(R.id.pb_main);
+        llStonkMain = view.findViewById(R.id.ll_main_stonk);
 
         llAllMain.setVisibility(View.GONE);
         pbMain.setVisibility(View.VISIBLE);
@@ -113,8 +106,9 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void onlineBseData(){
-        JsonArrayRequest req= new JsonArrayRequest(url_top5,
+    private void onlineBseData() {
+        String url_top5=getString(R.string.url_base)+"top5";
+        JsonArrayRequest req = new JsonArrayRequest(url_top5,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -132,27 +126,29 @@ public class HomeFragment extends Fragment {
 
         queue.add(req);
     }
+
     private void jsonBseParseSet(JSONArray jsonText) {
 
         try {
 
-            for(int j=0;j<jsonText.length();j++){
-                JSONObject obj= jsonText.getJSONObject(j);
-                JSONArray gArray=obj.getJSONArray("graph_values");
-                JSONArray tArray=obj.getJSONArray("time_values");
+            for (int j = 0; j < jsonText.length(); j++) {
+                JSONObject obj = jsonText.getJSONObject(j);
+                JSONArray gArray = obj.getJSONArray("graph_values");
+                JSONArray tArray = obj.getJSONArray("time_values");
 
                 //Log.d(TAG, "g1    "+gArray.getString(0));
 
-               ArrayList<String> gVal=new ArrayList<>();
-               for (int h= 0 ;h<gArray.length();h++){
-                   gVal.add(gArray.getString(h));
-               }
+                ArrayList<String> gVal = new ArrayList<>();
+                for (int h = 0; h < gArray.length(); h++) {
+                    gVal.add(gArray.getString(h));
+                }
 
-                ArrayList<String> tVal=new ArrayList<>();
-                for (int h= 0 ;h<gArray.length();h++){
+                ArrayList<String> tVal = new ArrayList<>();
+                for (int h = 0; h < gArray.length(); h++) {
                     tVal.add(tArray.getString(h));
                 }
-                bseList.add(new StockDataModel(obj.getString("NAME"), obj.getString("DO"),obj.getString("DH"), obj.getString("DL"), obj.getString("LTP"),obj.getString("PDC"),gVal,tVal));
+                //0=home 1=equity
+                bseList.add(new StockDataModel(obj.getString("NAME"), obj.getString("DO"), obj.getString("DH"), obj.getString("DL"), obj.getString("LTP"), obj.getString("PDC"), gVal, tVal,"0"));
                 bseAdapter.notifyDataSetChanged();
             }
 
@@ -179,6 +175,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void onlineRealData() {
+        String url_sensex=getString(R.string.url_base)+"sensex";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url_sensex,
                 new Response.Listener<String>() {
                     @Override
@@ -213,14 +210,14 @@ public class HomeFragment extends Fragment {
             tvDL.setText(obj.getString("DL"));
             tvLTP.setText(obj.getString("LTP"));
             //tvName.setText(obj.getString("NAME"));
-            String pdc=obj.getString("PDC");
+            String pdc = obj.getString("PDC");
 
             JSONArray graphValues = obj.getJSONArray("graph_values");
             JSONArray timeValues = obj.getJSONArray("time_values");
             //Log.d(TAG, "jsonParseSet: " + graphValues);
 
 
-            series.addPoint(new ValueLinePoint("Seen00",Float.parseFloat(pdc)));
+            series.addPoint(new ValueLinePoint("Seen00", Float.parseFloat(pdc)));
 
 
             for (int i = 0; i < graphValues.length(); i++) {

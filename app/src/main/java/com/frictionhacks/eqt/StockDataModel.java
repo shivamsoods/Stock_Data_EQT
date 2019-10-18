@@ -1,19 +1,17 @@
 package com.frictionhacks.eqt;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class StockDataModel {
-    private String stockName, dayOpen, dayHigh, dayLow, lastTradedPrice,pdc;
-private ArrayList<String> gVal,tVal;
+    private String stockName, dayOpen, dayHigh, dayLow, lastTradedPrice, pdc,width;
+    private ArrayList<String> gVal, tVal;
 
 
     public StockDataModel() {
 
     }
 
-    public StockDataModel(String stockName, String dayOpen, String dayHigh, String dayLow, String lastTradedPrice, String pdc, ArrayList<String> gVal, ArrayList<String> tVal) {
+    public StockDataModel(String stockName, String dayOpen, String dayHigh, String dayLow, String lastTradedPrice, String pdc, ArrayList<String> gVal, ArrayList<String> tVal,String width) {
         this.stockName = stockName;
         this.dayOpen = dayOpen;
         this.dayHigh = dayHigh;
@@ -22,6 +20,7 @@ private ArrayList<String> gVal,tVal;
         this.pdc = pdc;
         this.gVal = gVal;
         this.tVal = tVal;
+        this.width=width;
     }
 
     public StockDataModel(String stockName, String dayOpen, String dayHigh, String dayLow, String lastTradedPrice) {
@@ -30,6 +29,14 @@ private ArrayList<String> gVal,tVal;
         this.dayHigh = dayHigh;
         this.dayLow = dayLow;
         this.lastTradedPrice = lastTradedPrice;
+    }
+
+    public String getWidth() {
+        return width;
+    }
+
+    public void setWidth(String width) {
+        this.width = width;
     }
 
     public ArrayList<String> gettVal() {
