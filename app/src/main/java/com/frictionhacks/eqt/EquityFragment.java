@@ -3,18 +3,17 @@ package com.frictionhacks.eqt;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ramotion.fluidslider.FluidSlider;
 
@@ -34,30 +33,32 @@ public class EquityFragment extends Fragment {
     public EquityFragment() {
         // Required empty public constructor
     }
+
     private Button btnSearchSubmit;
     private RecyclerView searchRecyclerView;
-    private List<StockDataModel> searchResultList= new ArrayList<>();
+    private List<StockDataModel> searchResultList = new ArrayList<>();
     private StockAdapter searchResultAdapter;
     private LinearLayout llSearchTop;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-      View view= inflater.inflate(R.layout.fragment_equity, container, false);
 
-        btnSearchSubmit=view.findViewById(R.id.btn_search_submit);
-        searchRecyclerView=view.findViewById(R.id.rv_search_stock);
-        llSearchTop=view.findViewById(R.id.ll_search_top);
+        View view = inflater.inflate(R.layout.fragment_equity, container, false);
 
-        searchResultAdapter=new StockAdapter(searchResultList);
-        RecyclerView.LayoutManager searchLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
+        btnSearchSubmit = view.findViewById(R.id.btn_search_submit);
+        searchRecyclerView = view.findViewById(R.id.rv_search_stock);
+        llSearchTop = view.findViewById(R.id.ll_search_top);
+
+        searchResultAdapter = new StockAdapter(searchResultList);
+
+        RecyclerView.LayoutManager searchLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         searchRecyclerView.setLayoutManager(searchLayoutManager);
         searchRecyclerView.setItemAnimator(new DefaultItemAnimator());
         searchRecyclerView.setAdapter(searchResultAdapter);
 
 
-        StockDataModel bseStock= new StockDataModel("name-1","12","12","12","12.6");
+        StockDataModel bseStock = new StockDataModel("name-1", "12", "12", "12", "12.6");
 
         searchResultList.add(bseStock);
         searchResultList.add(bseStock);
@@ -68,6 +69,8 @@ public class EquityFragment extends Fragment {
         searchResultAdapter.notifyDataSetChanged();
 
         searchRecyclerView.setVisibility(View.GONE);
+
+
         final String min = "Short time";
         final String max = "Long time";
 
@@ -87,28 +90,29 @@ public class EquityFragment extends Fragment {
             }
         });
 
-       slider.setBubbleText("Days");
-       //slider.setColorBubble(Color.parseColor("#13E42D"));
+        slider.setBubbleText("Days");
+        //slider.setColorBubble(Color.parseColor("#13E42D"));
         slider.setColorBar(Color.parseColor("#13EDCA"));
         slider.setPosition(0.5f);
         slider.setStartText(min);
         slider.setEndText(max);
 
 
-
         btnSearchSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                float pos=slider.getPosition();
-                pos=pos*100;
-                Log.d("TAAG", "value set is "+pos );
+                float pos = slider.getPosition();
+                pos = pos * 100;
+                Log.d("TAAG", "value set is " + pos);
                 llSearchTop.setVisibility(View.GONE);
                 searchRecyclerView.setVisibility(View.VISIBLE);
             }
         });
-    return view;
+        return view;
 
     }
+
+
 
 
 

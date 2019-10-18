@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +33,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 import static com.android.volley.VolleyLog.TAG;
@@ -43,9 +46,9 @@ public class StockSearchFragment extends Fragment {
     private SearchAdapterHolder holder;
     private final int REQ_CODE = 55;
     private String url_base = "https://92878288.ngrok.io/search?code=";
-    private ValueLineSeries series;
-    private ValueLineChart mCubicValueLineChart;
     private RequestQueue queue;
+    private LinearLayout llSearch;
+    private ProgressBar pbSearch;
 
 
     public StockSearchFragment() {
@@ -68,7 +71,11 @@ public class StockSearchFragment extends Fragment {
         holder = new SearchAdapterHolder();
         holder.addAdapter(getListOfStrings(), REQ_CODE);
         queue = Volley.newRequestQueue(getContext());
+        llSearch=view.findViewById(R.id.ll_search_stonk);
+        pbSearch=view.findViewById(R.id.pb_search);
 
+        llSearch.setVisibility(View.INVISIBLE);
+        pbSearch.setVisibility(View.VISIBLE);
         CustomSearch.start(StockSearchFragment.this, REQ_CODE, holder);
 
 
@@ -88,8 +95,14 @@ public class StockSearchFragment extends Fragment {
 
         }
       else
-      {
+      {        holder = new SearchAdapterHolder();
+        holder.addAdapter(getListOfStrings(), REQ_CODE);
+        queue = Volley.newRequestQueue(getContext());
+
+        CustomSearch.start(StockSearchFragment.this, REQ_CODE, holder);
+
           startActivity(new Intent(getActivity(),MainActivity.class));
+          Objects.requireNonNull(getActivity()).finish();
       }
         queue = Volley.newRequestQueue(getContext());
 
@@ -186,6 +199,8 @@ public class StockSearchFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d(TAG, "error " + error);
+                pbSearch.setVisibility(View.GONE);
+                llSearch.setVisibility(View.VISIBLE);
 
             }
         });
