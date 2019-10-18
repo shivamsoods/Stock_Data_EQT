@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,12 +54,13 @@ public class EquityFragment extends Fragment {
     private List<StockDataModel> searchResultList = new ArrayList<>();
     private StockAdapter searchResultAdapter;
     private RequestQueue queue;
-    private LinearLayout llSearchTop;
+    private LinearLayout llEquityStonk;
     private String url_search;
     final String min = "Short time";
     final String max = "Long time";
     private EditText etBudget;
-
+    private ProgressBar pbEquity;
+    private CardView cvEquityAll;
 
 
 
@@ -69,11 +72,13 @@ public class EquityFragment extends Fragment {
 
         btnSearchSubmit = view.findViewById(R.id.btn_search_submit);
         searchRecyclerView = view.findViewById(R.id.rv_equity_stock);
-        llSearchTop = view.findViewById(R.id.ll_search_top);
+        cvEquityAll=view.findViewById(R.id.cv_equity_all);
 
         etBudget=view.findViewById(R.id.et_search_budget);
         searchResultAdapter = new StockAdapter(searchResultList);
 
+        pbEquity=view.findViewById(R.id.pb_equity);
+        llEquityStonk=view.findViewById(R.id.ll_equity_stonk);
 
         RecyclerView.LayoutManager searchLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         searchRecyclerView.setLayoutManager(searchLayoutManager);
@@ -84,8 +89,8 @@ public class EquityFragment extends Fragment {
         searchResultList.clear();
         queue = Volley.newRequestQueue(getContext());
 
-
-
+        pbEquity.setVisibility(View.GONE);
+        llEquityStonk.setVisibility(View.GONE);
 
         final FluidSlider slider = view.findViewById(R.id.fs_search);
         slider.setBeginTrackingListener(new Function0<Unit>() {
@@ -117,6 +122,10 @@ public class EquityFragment extends Fragment {
                 pos=pos*100;
                 int posi;
                 String budget=etBudget.getText().toString();
+
+                cvEquityAll.setVisibility(View.GONE);
+                pbEquity.setVisibility(View.VISIBLE);
+                searchRecyclerView.setVisibility(View.GONE);
 
                 if(budget.isEmpty()){
                     budget="0";
@@ -158,6 +167,10 @@ private void onlineSearchRequest(String budget,String tenure){
         @Override
         public void onErrorResponse(VolleyError error) {
             Log.d(TAG, "error " + error);
+            llEquityStonk.setVisibility(View.VISIBLE);
+            cvEquityAll.setVisibility(View.GONE);
+            searchRecyclerView.setVisibility(View.GONE);
+
 
         }
     });
@@ -186,8 +199,7 @@ private void jsonSearchParseSet(JSONArray jsonText){
             //0=home 1=equity
             searchResultList.add(new StockDataModel(obj.getString("NAME"), obj.getString("DO"), obj.getString("DH"), obj.getString("DL"), obj.getString("LTP"), obj.getString("PDC"), gVal, tVal,"1"));
             searchResultAdapter.notifyDataSetChanged();
-
-            llSearchTop.setVisibility(View.GONE);
+            pbEquity.setVisibility(View.GONE);
             searchRecyclerView.setVisibility(View.VISIBLE);
         }
 
