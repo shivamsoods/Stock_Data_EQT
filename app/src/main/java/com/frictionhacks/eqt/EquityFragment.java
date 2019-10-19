@@ -52,7 +52,7 @@ public class EquityFragment extends Fragment {
     private Button btnSearchSubmit;
     private RecyclerView searchRecyclerView;
     private List<StockDataModel> searchResultList = new ArrayList<>();
-    private StockAdapter searchResultAdapter;
+    private EquitySearchAdapter searchResultAdapter;
     private RequestQueue queue;
     private LinearLayout llEquityStonk;
     private String url_search;
@@ -75,7 +75,7 @@ public class EquityFragment extends Fragment {
         cvEquityAll=view.findViewById(R.id.cv_equity_all);
 
         etBudget=view.findViewById(R.id.et_search_budget);
-        searchResultAdapter = new StockAdapter(searchResultList);
+        searchResultAdapter = new EquitySearchAdapter(searchResultList);
 
         pbEquity=view.findViewById(R.id.pb_equity);
         llEquityStonk=view.findViewById(R.id.ll_equity_stonk);

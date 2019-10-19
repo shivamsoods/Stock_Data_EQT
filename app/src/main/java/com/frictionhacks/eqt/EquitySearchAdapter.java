@@ -1,7 +1,6 @@
 package com.frictionhacks.eqt;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import static com.android.volley.VolleyLog.TAG;
-
-public class StockAdapter extends RecyclerView.Adapter<StockAdapter.MyViewHolder> {
+public class EquitySearchAdapter extends RecyclerView.Adapter<EquitySearchAdapter.MyViewHolder> {
     private List<StockDataModel> stockList;
     private View itemView;
-    private String width;
     private CardView cardView;
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -31,13 +27,13 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.MyViewHolder
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            stockName = itemView.findViewById(R.id.tv_display_stock_name);
-            stockPrice = itemView.findViewById(R.id.tv_display_stock_price);
-            cardView = itemView.findViewById(R.id.cv_home_stock);
+            stockName = itemView.findViewById(R.id.tv_equity_search_name);
+            stockPrice = itemView.findViewById(R.id.tv_equity_search_price);
+            cardView = itemView.findViewById(R.id.cv_equity_search);
         }
     }
 
-    public StockAdapter(List<StockDataModel> stockList) {
+    public EquitySearchAdapter(List<StockDataModel> stockList) {
         this.stockList = stockList;
     }
 
@@ -47,7 +43,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.MyViewHolder
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.stock_home_display, parent, false);
+                .inflate(R.layout.equity_search_display, parent, false);
 
 
         return new MyViewHolder(itemView);
@@ -71,7 +67,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.MyViewHolder
                 bun.putString("dl", stock.getDayLow());
                 bun.putSerializable("gVal", stock.getgVal());
                 bun.putSerializable("tVal", stock.gettVal());
-                bun.putString("width", stock.getUserRec());
+                bun.putString("userRec", stock.getUserRec());
 
                 loadFragment(new StockDetailFragment(), bun);
 
@@ -91,6 +87,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.MyViewHolder
         FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
         ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right, 0, 0);
         ft.replace(R.id.fl_main, fragment);
+        ft.addToBackStack(null);
         ft.commit();
     }
 }
