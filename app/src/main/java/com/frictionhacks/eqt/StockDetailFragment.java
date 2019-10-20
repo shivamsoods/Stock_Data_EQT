@@ -85,9 +85,7 @@ public class StockDetailFragment extends Fragment {
         tvDayOpen.setText(dayOpen);
 
 
-        if (userRec.equals("1")) {
-            sendClickedStock(name);
-        }
+
 
         return view;
     }
