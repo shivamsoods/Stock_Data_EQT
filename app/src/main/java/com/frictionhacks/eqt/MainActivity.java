@@ -35,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
         AHBottomNavigationItem item1= new AHBottomNavigationItem("Home",R.drawable.ic_home);
         AHBottomNavigationItem item2= new AHBottomNavigationItem("Equity",R.drawable.ic_equity_finder);
         AHBottomNavigationItem item3= new AHBottomNavigationItem("Search",R.drawable.ic_search);
-        AHBottomNavigationItem item4= new AHBottomNavigationItem("OCR",R.drawable.ic_shopping_cart);
-
+        AHBottomNavigationItem item4= new AHBottomNavigationItem("OCR",R.drawable.ic_camera);
         nbBottom.addItem(item1);
         nbBottom.addItem(item2);
         nbBottom.addItem(item3);
@@ -68,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 3:
                         //ocr
-                        loadFragment(new EquityFragment());
+                        loadFragment(new OcrFragment());
                         break;
 
                     default:
