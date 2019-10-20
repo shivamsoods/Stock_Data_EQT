@@ -1,6 +1,7 @@
 package com.frictionhacks.eqt;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -129,6 +131,8 @@ public class EquityFragment extends Fragment {
 
                 if(budget.isEmpty()){
                     budget="0";
+                    Toast.makeText(getContext(), "Please enter a Budget", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getActivity(),MainActivity.class));
                 }
 
                 Log.d(TAG, "int value budget "+budget);
