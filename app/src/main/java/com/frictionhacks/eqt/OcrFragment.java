@@ -155,7 +155,8 @@ btnUpload.setOnClickListener(new View.OnClickListener() {
     }
     private void uploadPreImage(){
       //  url_search=getString(R.string.url_base)+"budget?budget="+budget+"&ls="+tenure;
-        url_image=getString(R.string.url_base)+"ocr?q=https://images.sampletemplates.com/wp-content/uploads/2015/04/stock-purchase-agreement-sample.jpg";
+        img_url = "" // Save the uploaded image url in this variable
+        url_image=getString(R.string.url_base)+"ocr?q="+img_url;
         Log.d(VolleyLog.TAG, "budget url "+url_image);
 pbOcr.setVisibility(View.VISIBLE);
 btnUpload.setVisibility(View.GONE);
